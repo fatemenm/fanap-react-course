@@ -19,43 +19,54 @@ const useStyles = makeStyles(theme => ({
 }));
 const CardDetail = ({ selectedCard }) => {
   const classes = useStyles();
-  return (
-    <div className="ui container card-detail">
-      <CardContent>
-        <Typography variant="h4" color="textBlack" component="p">
-          {selectedCard.title}
-        </Typography>
-      </CardContent>
-      <CardContent>
-        <Typography variant="subtitle1" color="textSecondary" component="p">
-          by: {selectedCard.author}
-        </Typography>
-        <Typography variant="subtitle1" color="textSecondary" component="p">
-          date: {selectedCard.created}
-        </Typography>
-      </CardContent>
-      <CardMedia
-        className={classes.media}
-        image={selectedCard.cover}
-        title={selectedCard.title}
-      />
-      <CardContent>
-        <Typography variant="h5" color="textBlack" component="p">
-          {selectedCard.description}
-        </Typography>
-      </CardContent>
-      <CardContent>
-        <Typography variant="body1" color="textSecondary" component="p">
-          {selectedCard.body}
-        </Typography>
-      </CardContent>
-      <CardContent>
-        <Button component={Link} to={"/"} variant="contained" color="primary">
-          BACK TO LIST
-        </Button>
-      </CardContent>
-    </div>
-  );
+
+  if (selectedCard === null){
+    window.location.replace("/"); 
+  }
+
+  else {
+    let image_address =  `../${selectedCard.cover}`;
+    return (
+      <div className="ui container card-detail">
+        <CardContent>
+          <Typography variant="h4" color="textBlack" component="p">
+            {selectedCard.title}
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography variant="subtitle1" color="textSecondary" component="p">
+            by: {selectedCard.author}
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary" component="p">
+            date: {selectedCard.created}
+          </Typography>
+        </CardContent>
+        <CardContent>  
+          <CardMedia
+          className={classes.media}
+          image= {image_address}
+          title={selectedCard.title}
+          />
+        </CardContent>
+        <CardContent>
+          <Typography variant="h5" color="textBlack" component="p">
+            {selectedCard.description}
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Typography variant="body1" color="textSecondary" component="p">
+            {selectedCard.body}
+          </Typography>
+        </CardContent>
+        <CardContent>
+          <Button component={Link} to={"/"} variant="contained" color="primary">
+            BACK TO LIST
+          </Button>
+        </CardContent>
+      </div>
+    );
+  }
+
 };
 
 export default CardDetail;
